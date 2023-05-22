@@ -19,16 +19,19 @@ OBJ := $(patsubst $(SRCDIR)/%.c, $(OBJDIR)/%.o, $(SRC))
 
 FLAGS := -Wextra -Werror -Wall -O3
 
-.PHONY: all clean fclean re
+PARAMS := 0 1 2 3 4 5 6 7 8 9
+
+.PHONY: all clean fclean re run
 
 all: $(TARGET)
-
+	
 $(TARGET): $(OBJ) $(LIBFT) $(TOOLS)
 	@mkdir -p $(BINDIR)
 	@$(CC) $(FLAGS) -o $@ $(OBJ) $(LIBFT) $(TOOLS) > /dev/null
 	@echo "$(NAME) successfully compiled in $(BINDIR)/"
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.c
+	@clear
 	@mkdir -p $(OBJDIR)
 	@$(CC) $(CFLAGS) -c $< -o $@
 
@@ -49,3 +52,8 @@ fclean: clean
 	@$(MAKE) -s -C $(TOOLS_DIR) fclean
 
 re: fclean all
+
+run:
+	@clear
+	@printf "Running $(NAME) with the following params: $(PARAMS)\n\nOuput:\n"
+	@cd $(BINDIR) ; ./$(NAME) "$(PARAMS)"

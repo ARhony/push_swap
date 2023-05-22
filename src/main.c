@@ -6,11 +6,11 @@
 /*   By: aramon <aramon@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 09:35:48 by aramon            #+#    #+#             */
-/*   Updated: 2023/05/22 11:56:38 by aramon           ###   ########.fr       */
+/*   Updated: 2023/05/22 14:23:09 by aramon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/push_swap.h"
+#include "../push_swap.h"
 
 void print(t_list *pile_a, int size)
 {
@@ -29,8 +29,9 @@ void print(t_list *pile_a, int size)
 
 int main(int argc, char **argv)
 {
+    
     if (argc != 2)
         return (0);
-    ft_printf(argv[1]);
+    ft_printf("%s\n", argv[1]);
     return (0);
 }
