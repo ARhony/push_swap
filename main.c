@@ -10,3 +10,26 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "push_swap.h"
+
+void print(t_list *pile_a, int size)
+{
+    int     i;
+    int     max;
+    t_list 	*n;
+
+    i = 0;
+    n = pile_a;
+    while (i < size)
+    {
+        printf("%d ", *((int*)(n->content)));
+        n = n->next;
+        i++;
+    }
+}
+
+int main(int argc, char **argv)
+{
+    ft_printf("Ok");
+    return (0);
+}
