@@ -1,39 +1,51 @@
-NAME = push_swap
+CC := gcc
+CFLAGS := -Wall -Wextra -O2
 
-# Tools
-TOOLS_DIR = tools
-NAMETOOLS = $(TOOLS_DIR)/tools.a
-TOOLS = $(NAMETOOLS)
+SRCDIR := src
+OBJDIR := obj
+BINDIR := bin
 
-# Libft
-LIBFT_DIR = libft
-NAMELIBFT = $(LIBFT_DIR)/libft.a
-LIBFT = $(NAMELIBFT)
+NAME := push_swap
+TARGET := $(BINDIR)/$(NAME)
 
-SRC = *.c
-OBJS = $(SRC:.c=.o)
+LIBFT_DIR := lib/libft
+LIBFT := $(LIBFT_DIR)/libft.a
 
-FLAGS = -Wextra -Werror -Wall -O3
+TOOLS_DIR := lib/tools
+TOOLS := $(TOOLS_DIR)/tools.a
 
-all: $(TOOLS) $(LIBFT) $(NAME)
+SRC := $(wildcard $(SRCDIR)/*.c)
+OBJ := $(patsubst $(SRCDIR)/%.c, $(OBJDIR)/%.o, $(SRC))
 
-$(TOOLS):
-	cd $(TOOLS_DIR); make
-
-$(LIBFT):
-	cd $(LIBFT_DIR); make
-
-$(NAME):
-	@echo "Compiling push_swap"
-	gcc $(FLAGS) -o $(NAME) $(SRC) $(NAMETOOLS) $(NAMELIBFT) -lXext -lX11
-
-clean:
-	cd $(LIBFT_DIR); make clean
-	cd $(TOOLS_DIR); make clean
-	rm -f $(NAME) $(OBJ)
-
-fclean: clean
-
-re: clean all
+FLAGS := -Wextra -Werror -Wall -O3
 
 .PHONY: all clean fclean re
+
+all: $(TARGET)
+
+$(TARGET): $(OBJ) $(LIBFT) $(TOOLS)
+	@mkdir -p $(BINDIR)
+	@$(CC) $(FLAGS) -o $@ $(OBJ) $(LIBFT) $(TOOLS) > /dev/null
+	@echo "$(NAME) successfully compiled in $(BINDIR)/"
+
+$(OBJDIR)/%.o: $(SRCDIR)/%.c
+	@mkdir -p $(OBJDIR)
+	@$(CC) $(CFLAGS) -c $< -o $@
+
+$(LIBFT):
+	@$(MAKE) -s -C $(LIBFT_DIR)
+
+$(TOOLS):
+	@$(MAKE) -s -C $(TOOLS_DIR)
+
+clean:
+	@$(MAKE) -s -C $(LIBFT_DIR) clean
+	@$(MAKE) -s -C $(TOOLS_DIR) clean
+	@rm -rf $(OBJDIR)
+	@rm -rf $(BINDIR)
+
+fclean: clean
+	@$(MAKE) -s -C $(LIBFT_DIR) fclean
+	@$(MAKE) -s -C $(TOOLS_DIR) fclean
+
+re: fclean all

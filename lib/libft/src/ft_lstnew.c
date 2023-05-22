@@ -1,36 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_lstnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aramon <aramon@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/22 09:35:48 by aramon            #+#    #+#             */
-/*   Updated: 2023/05/22 11:56:38 by aramon           ###   ########.fr       */
+/*   Created: 2023/02/08 22:49:18 by aramon            #+#    #+#             */
+/*   Updated: 2023/05/22 12:24:36 by aramon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/push_swap.h"
+#include "../libft.h"
 
-void print(t_list *pile_a, int size)
+t_list	*ft_lstnew(void *content)
 {
-    int     i;
-    t_list 	*n;
+	t_list	*lst;
 
-    i = 0;
-    n = pile_a;
-    while (i < size)
-    {
-        printf("%d ", *((int*)(n->content)));
-        n = n->next;
-        i++;
-    }
-}
-
-int main(int argc, char **argv)
-{
-    if (argc != 2)
-        return (0);
-    ft_printf(argv[1]);
-    return (0);
+	lst = (t_list *)malloc(sizeof(t_list));
+	if (lst == NULL)
+		return (NULL);
+	lst->content = content;
+	lst->next = NULL;
+	return (lst);
 }

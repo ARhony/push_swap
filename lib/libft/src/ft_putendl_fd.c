@@ -1,36 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_putendl_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aramon <aramon@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/22 09:35:48 by aramon            #+#    #+#             */
-/*   Updated: 2023/05/22 11:56:38 by aramon           ###   ########.fr       */
+/*   Created: 2023/02/07 16:33:36 by aramon            #+#    #+#             */
+/*   Updated: 2023/05/22 12:25:11 by aramon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/push_swap.h"
+#include "../libft.h"
 
-void print(t_list *pile_a, int size)
+void	ft_putendl_fd(char *s, int fd)
 {
-    int     i;
-    t_list 	*n;
-
-    i = 0;
-    n = pile_a;
-    while (i < size)
-    {
-        printf("%d ", *((int*)(n->content)));
-        n = n->next;
-        i++;
-    }
-}
-
-int main(int argc, char **argv)
-{
-    if (argc != 2)
-        return (0);
-    ft_printf(argv[1]);
-    return (0);
+	if (s == NULL)
+		return ;
+	if (fd < 0)
+		return ;
+	ft_putstr_fd(s, fd);
+	ft_putchar_fd('\n', fd);
 }

@@ -1,36 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aramon <aramon@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/22 09:35:48 by aramon            #+#    #+#             */
-/*   Updated: 2023/05/22 11:56:38 by aramon           ###   ########.fr       */
+/*   Created: 2023/02/01 19:14:02 by aramon            #+#    #+#             */
+/*   Updated: 2023/05/22 12:25:39 by aramon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/push_swap.h"
+#include "../libft.h"
 
-void print(t_list *pile_a, int size)
+int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
-    int     i;
-    t_list 	*n;
+	size_t			i;
+	unsigned char	*us1;
+	unsigned char	*us2;
 
-    i = 0;
-    n = pile_a;
-    while (i < size)
-    {
-        printf("%d ", *((int*)(n->content)));
-        n = n->next;
-        i++;
-    }
-}
-
-int main(int argc, char **argv)
-{
-    if (argc != 2)
-        return (0);
-    ft_printf(argv[1]);
-    return (0);
+	i = 0;
+	if (n == 0)
+		return (0);
+	us1 = (unsigned char *)s1;
+	us2 = (unsigned char *)s2;
+	while (us1[i] && us2[i] && us1[i] == us2[i] && i < n - 1)
+		i++;
+	return (us1[i] - us2[i]);
 }

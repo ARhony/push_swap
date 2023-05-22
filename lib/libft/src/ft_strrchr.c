@@ -1,36 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aramon <aramon@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/22 09:35:48 by aramon            #+#    #+#             */
-/*   Updated: 2023/05/22 11:56:38 by aramon           ###   ########.fr       */
+/*   Created: 2023/02/01 19:13:34 by aramon            #+#    #+#             */
+/*   Updated: 2023/05/22 12:25:43 by aramon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/push_swap.h"
+#include "../libft.h"
 
-void print(t_list *pile_a, int size)
+char	*ft_strrchr(const char *s, int c)
 {
-    int     i;
-    t_list 	*n;
+	int	i;
 
-    i = 0;
-    n = pile_a;
-    while (i < size)
-    {
-        printf("%d ", *((int*)(n->content)));
-        n = n->next;
-        i++;
-    }
-}
-
-int main(int argc, char **argv)
-{
-    if (argc != 2)
-        return (0);
-    ft_printf(argv[1]);
-    return (0);
+	i = ft_strlen(s) + 1;
+	while (--i >= 0)
+		if (s[i] == (char)c)
+			return ((char *)s + i);
+	return (0);
 }

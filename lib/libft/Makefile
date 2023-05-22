@@ -1,33 +1,52 @@
-SRC = ft_printf.c ft_printf_unsigned.c ft_printf_utils.c get_next_line.c get_next_line_utils.c ft_strjoin.c ft_calloc.c ft_tolower.c ft_toupper.c ft_isdigit.c ft_isalpha.c ft_isalnum.c ft_isascii.c ft_isprint.c ft_bzero.c ft_strlen.c ft_strdup.c ft_strlcpy.c ft_strlcat.c ft_strnstr.c ft_strchr.c ft_strrchr.c ft_strncmp.c ft_atoi.c ft_memset.c ft_memcpy.c ft_memmove.c ft_memchr.c ft_memcmp.c ft_striteri.c ft_strmapi.c ft_substr.c ft_strtrim.c ft_split.c ft_itoa.c ft_putchar_fd.c ft_putstr_fd.c ft_putendl_fd.c ft_putnbr_fd.c ft_lstnew.c ft_lstadd_front.c ft_lstsize.c ft_lstlast.c ft_lstadd_back.c ft_lstdelone.c ft_lstclear.c ft_lstiter.c ft_lstmap.c ft_lstat.c
+SRC_DIR = src
+OBJ_DIR = obj
 
-SRCS = $(SRC)
+SRCS = $(wildcard $(SRC_DIR)/*.c)
+OBJS = $(patsubst $(SRC_DIR)/%.c,$(OBJ_DIR)/%.o,$(SRCS))
 
 RM = rm -f
 FLAGS = -Wall -Wextra -Werror -O3
 
 NORM = norminette
 
-OBJ = $(SRCS:.c=.o)
+TOTAL_FILES = $(words $(SRCS))
+PROGRESS_BAR_LENGTH = 40
 
-.c.o:
-	gcc -c $(FLAGS) $< -o $@
+CURRENT_PROGRESS = 0
+
+define draw_progress_bar
+	$(eval TERMINAL_WIDTH=$(shell tput cols))
+	$(eval PROGRESS_BAR_LENGTH=$(shell echo $$(($(TERMINAL_WIDTH)-25))))
+	@printf "\rLIBFT:["
+	@perl -e 'printf "%s", "#" x int($1 * $(PROGRESS_BAR_LENGTH) / $(TOTAL_FILES))' $(2)
+	@perl -e 'printf "%s", " " x int(($(TOTAL_FILES) - $1) * $(PROGRESS_BAR_LENGTH) / $(TOTAL_FILES))' $(2)
+	@printf "] ($(1)/$(TOTAL_FILES))"
+endef
+
+
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
+	@mkdir -p $(OBJ_DIR)
+	@gcc -c $(FLAGS) $< -o $@
+	$(eval CURRENT_PROGRESS=$(shell echo $$(($(CURRENT_PROGRESS)+1))))
+	@$(call draw_progress_bar,$(CURRENT_PROGRESS),$(OBJS))
 
 NAME = libft.a
 
 all: $(NAME)
 
-$(NAME): $(OBJ)
-	ar rc $@ $^
+$(NAME): $(OBJS)
+	@ar rc $@ $^
+	@printf "\n"
 
 clean:
-	$(RM) $(OBJ)
+	@$(RM) $(OBJS)
 
 fclean: clean
-	$(RM) $(NAME)
+	@$(RM) $(NAME)
 
 re: fclean all
 
 norm:
-	$(NORM)
+	@$(NORM)
 
 .PHONY: all clean fclean re norm

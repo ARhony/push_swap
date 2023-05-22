@@ -1,36 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aramon <aramon@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/22 09:35:48 by aramon            #+#    #+#             */
-/*   Updated: 2023/05/22 11:56:38 by aramon           ###   ########.fr       */
+/*   Created: 2023/02/04 22:41:50 by aramon            #+#    #+#             */
+/*   Updated: 2023/05/22 12:25:31 by aramon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/push_swap.h"
+#include "../libft.h"
 
-void print(t_list *pile_a, int size)
+size_t	ft_strlcpy(char *dst, const char *src, size_t size)
 {
-    int     i;
-    t_list 	*n;
+	size_t	i;
 
-    i = 0;
-    n = pile_a;
-    while (i < size)
-    {
-        printf("%d ", *((int*)(n->content)));
-        n = n->next;
-        i++;
-    }
-}
-
-int main(int argc, char **argv)
-{
-    if (argc != 2)
-        return (0);
-    ft_printf(argv[1]);
-    return (0);
+	if (size == 0)
+		return (ft_strlen(src));
+	i = 0;
+	while (i < size - 1 && src[i])
+	{
+		dst[i] = src[i];
+		i++;
+	}
+	dst[i] = '\0';
+	return (ft_strlen(src));
 }

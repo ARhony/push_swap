@@ -1,36 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aramon <aramon@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/22 09:35:48 by aramon            #+#    #+#             */
-/*   Updated: 2023/05/22 11:56:38 by aramon           ###   ########.fr       */
+/*   Created: 2023/02/05 17:59:57 by aramon            #+#    #+#             */
+/*   Updated: 2023/05/22 12:24:00 by aramon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/push_swap.h"
+#include "../libft.h"
 
-void print(t_list *pile_a, int size)
+void	*ft_calloc(size_t nmemb, size_t size)
 {
-    int     i;
-    t_list 	*n;
+	size_t	tmp;
+	void	*ret;
 
-    i = 0;
-    n = pile_a;
-    while (i < size)
-    {
-        printf("%d ", *((int*)(n->content)));
-        n = n->next;
-        i++;
-    }
-}
-
-int main(int argc, char **argv)
-{
-    if (argc != 2)
-        return (0);
-    ft_printf(argv[1]);
-    return (0);
+	if (size == 0 || nmemb == 0)
+		return (malloc(0));
+	tmp = size * nmemb;
+	if (tmp / size != nmemb)
+		return (NULL);
+	ret = malloc(size * nmemb);
+	if (ret == NULL)
+		return (malloc(0));
+	ft_bzero(ret, tmp);
+	return (ret);
 }
