@@ -1,25 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print.c                                            :+:      :+:    :+:   */
+/*   instr.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aramon <aramon@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/22 14:49:16 by aramon            #+#    #+#             */
-/*   Updated: 2023/05/22 15:33:08 by aramon           ###   ########.fr       */
+/*   Created: 2023/05/22 14:51:20 by aramon            #+#    #+#             */
+/*   Updated: 2023/05/22 15:32:54 by aramon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/push_swap.h"
 
-void print_piles(t_list *p)
+void    s(char t, t_piles p)
 {
-    t_list 	*n;
-
-    n = p;
-    while (n)
+    if (t == 'a')
     {
-        printf("%d ", *((int*)(n->content)));
-        n = n->next;
+        swap(&(p.a));
+        ft_printf("sa");
     }
+    else if (t == 'b')
+    {
+        swap(&(p.b));
+        ft_printf("sb");
+    }
+    else if (t == 's')
+    {
+        swap(&(p.a));
+        swap(&(p.b));
+        ft_printf("ss");
+    }
+    else
+        return ;
 }

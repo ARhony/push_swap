@@ -1,6 +1,8 @@
 SRC_DIR = src
 OBJ_DIR = obj
 
+LIBFT = ../libft/libft.a
+
 SRCS = $(wildcard $(SRC_DIR)/*.c)
 OBJS = $(patsubst $(SRC_DIR)/%.c,$(OBJ_DIR)/%.o,$(SRCS))
 
@@ -25,7 +27,7 @@ endef
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	@mkdir -p $(OBJ_DIR)
-	@gcc -c $(FLAGS) $< -o $@
+	gcc -c $(FLAGS) $< -o $@
 	$(eval CURRENT_PROGRESS=$(shell echo $$(($(CURRENT_PROGRESS)+1))))
 	@$(call draw_progress_bar,$(CURRENT_PROGRESS),$(OBJS))
 
@@ -34,7 +36,7 @@ NAME = tools.a
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	@ar rc $@ $^
+	ar rc $@ $^ $(LIBFT)
 	@printf "\n"
 
 clean:

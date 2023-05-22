@@ -25,7 +25,7 @@ PARAMS := 0 1 2 3 4 5 6 7 8 9
 
 all: $(TARGET)
 	
-$(TARGET): $(OBJ) $(LIBFT) $(TOOLS)
+$(TARGET): $(LIBFT) $(TOOLS) $(OBJ)
 	@mkdir -p $(BINDIR)
 	@$(CC) $(FLAGS) -o $@ $(OBJ) $(LIBFT) $(TOOLS) > /dev/null
 	@echo "$(NAME) successfully compiled in $(BINDIR)/"
