@@ -16,7 +16,7 @@ CURRENT_PROGRESS = 0
 
 define draw_progress_bar
 	$(eval TERMINAL_WIDTH=$(shell tput cols))
-	$(eval PROGRESS_BAR_LENGTH=$(shell echo $$(($(TERMINAL_WIDTH)-25))))
+	$(eval PROGRESS_BAR_LENGTH=$(shell echo $$(($(TERMINAL_WIDTH)-16))))
 	@printf "\rTOOLS:["
 	@perl -e 'printf "%s", "#" x int($1 * $(PROGRESS_BAR_LENGTH) / $(TOTAL_FILES))' $(2)
 	@perl -e 'printf "%s", " " x int(($(TOTAL_FILES) - $1) * $(PROGRESS_BAR_LENGTH) / $(TOTAL_FILES))' $(2)

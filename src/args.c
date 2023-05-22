@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/push_swap.h"
+#include "../push_swap.h"
 
 void    fill(int *all, char **argv)
 {

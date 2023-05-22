@@ -21,7 +21,7 @@ FLAGS := -Wextra -Werror -Wall -O3
 
 PARAMS := 0 1 2 3 4 5 6 7 8 9
 
-.PHONY: all clean fclean re run
+.PHONY: all clean fclean re run up
 
 all: $(TARGET)
 	
@@ -31,7 +31,6 @@ $(TARGET): $(OBJ) $(LIBFT) $(TOOLS)
 	@echo "$(NAME) successfully compiled in $(BINDIR)/"
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.c
-	@clear
 	@mkdir -p $(OBJDIR)
 	@$(CC) $(CFLAGS) -c $< -o $@
 
@@ -53,7 +52,10 @@ fclean: clean
 
 re: fclean all
 
-run:
-	@clear
-	@printf "Running $(NAME) with the following params: $(PARAMS)\n\nOuput:\n"
+up:
+	@$(CC) $(FLAGS) -o $@ $(OBJ) $(LIBFT) $(TOOLS) > /dev/null
+	@echo "$(NAME) successfully compiled in $(BINDIR)/"
+
+run: up
+	@printf "\nRunning $(NAME) with the following params:\n$(PARAMS)\n\nOuput:\n"
 	@cd $(BINDIR) ; ./$(NAME) "$(PARAMS)"
