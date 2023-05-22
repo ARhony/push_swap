@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: aramon <aramon@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/21 17:20:22 by aramon            #+#    #+#             */
-/*   Updated: 2023/05/21 17:26:08 by aramon           ###   ########.fr       */
+/*   Created: 2023/05/22 09:35:48 by aramon            #+#    #+#             */
+/*   Updated: 2023/05/22 09:45:13 by aramon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 void print(t_list *pile_a, int size)
 {
     int     i;
-    int     max;
     t_list 	*n;
 
     i = 0;
@@ -30,6 +29,8 @@ void print(t_list *pile_a, int size)
 
 int main(int argc, char **argv)
 {
-    ft_printf("Ok");
+    if (argc != 2)
+        return (0);
+    ft_printf(argv[1]);
     return (0);
 }

@@ -1,7 +1,7 @@
 #ifndef TOOLS_H
-#define TOOLS_H
+# define TOOLS_H
 
-#include "../libft/libft.h"
+# include "../libft/libft.h"
 
 void    rotate(t_list **p);
 void    swap(t_list **p);
