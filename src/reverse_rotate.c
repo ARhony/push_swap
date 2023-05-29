@@ -1,37 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push.c                                             :+:      :+:    :+:   */
+/*   reverse_rotate.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aramon <aramon@student.42perpignan.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/22 09:36:48 by aramon            #+#    #+#             */
-/*   Updated: 2023/05/22 09:36:48 by aramon           ###   ########.fr       */
+/*   Created: 2023/05/22 09:36:51 by aramon            #+#    #+#             */
+/*   Updated: 2023/05/22 09:36:51 by aramon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../tools.h"
+#include "../inc/push_swap.h"
 
-void    push(t_list **f, t_list **t)
+void    reverse_rotate(t_list **p)
 {
-    t_list  *f_tmp;
-    t_list  *tmp;
     int     i;
-    int     ti;
+    int     max;
+    void    *tmp;
 
-    ti = ft_lstsize(*f) - 1;
-    f_tmp = *f;
     i = 0;
-    while (f_tmp)
+    if (*p == NULL)
+        return ;
+    else
+        if ((*p)->next == NULL)
+            return ;
+    max = ft_lstsize(*p);
+    tmp = (*p)->content;
+    while (1)
     {
-        if (i + 1 == ti)
+        if (i + 1 < max)
+            ft_lstat(*p, i)->content =
+                    ft_lstat(*p, i + 1)->content;
+        else
         {
-            tmp = f_tmp->next;
-            f_tmp->next = NULL;
-            ft_lstadd_back(t, tmp);
-            break ;
+            ft_lstat(*p, i)->content = tmp;
+            break;
         }
-        f_tmp = f_tmp->next;
         i++;
     }
 }

@@ -35,7 +35,7 @@ void    fill(int *all, char **argv)
     all[c] = 0;
 }
 
-int     get_int_amount(char **argv)
+int     get_nb_amount(char **argv)
 {
 	int     i;
 	int     k;
@@ -64,7 +64,24 @@ void    cut_args(int *all, t_list **pile_a, int max)
     d = 0;
     while (d < max)
     {
-        ft_lstadd_back(pile_a, ft_lstnew(&all[d]));
+        ft_lstadd_front(pile_a, ft_lstnew(&all[d]));
         d++;
     }
+}
+
+int	args(t_piles *piles, char **argv)
+{
+	int     *n_holder;
+    int     n_amount;
+
+	piles->a = NULL;
+	piles->b = NULL;
+	n_amount = get_nb_amount(argv);
+	n_holder = (int*) malloc(sizeof(int) * (n_amount + 1));
+	if (!n_amount)
+        return (1);
+	// Check error
+	fill(n_holder, argv);
+	cut_args(n_holder, &(piles->a), n_amount);
+	return (0);
 }

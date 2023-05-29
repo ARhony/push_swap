@@ -10,13 +10,18 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../tools.h"
+#include "../inc/push_swap.h"
 
 void    rotate(t_list **p)
 {
     int     i;
     void    *tmp;
 
+    if (*p == NULL)
+        return ;
+    else
+        if ((*p)->next == NULL)
+            return ;
     i = ft_lstsize(*p) - 1;
     tmp = ft_lstlast(*p)->content;
     while (1)

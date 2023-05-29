@@ -10,28 +10,17 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../tools.h"
+#include "../inc/push_swap.h"
 
-void    swap(t_list **p)
+void    swap(t_list *p)
 {
+    int     pile_size;
     void    *c;
-    t_list  *tmp;
-    int     i;
-    int     ti;
 
-    tmp = *p;
-    i = 0;
-    ti = ft_lstsize(*p) - 1;
-    while (tmp)
-    {
-        if (i + 1 == ti)
-        {
-            c = tmp->content;
-            tmp->content = tmp->next->content;
-            tmp->next->content = c;
-            break ;
-        }
-        tmp = tmp->next;
-        i++;
-    }
+    pile_size = ft_lstsize(p);
+    if (pile_size < 2)
+        return ;
+    c = ft_lstat(p, pile_size - 2)->content;
+    ft_lstat(p, pile_size - 2)->content = ft_lstat(p, pile_size - 1)->content;
+    ft_lstat(p, pile_size - 1)->content = c;
 }
